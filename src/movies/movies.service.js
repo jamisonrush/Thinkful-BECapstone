@@ -7,7 +7,6 @@ async function list(is_showing = false) {
     query
       .join("movies_theaters", "movies.movie_id", "movies_theaters.movie_id")
       .where({ "movies_theaters.is_showing": true })
-      .groupBy("movies.movie_id");
   }
 
   return query;
