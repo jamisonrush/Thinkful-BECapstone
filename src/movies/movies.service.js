@@ -1,15 +1,15 @@
 const knex = require("../db/connection");
 
 async function list(is_showing = false) {
-  const query = knex("movies").select("*");
-
   if (is_showing) {
-    query
-      .join("movies_theaters", "movies.movie_id", "movies_theaters.movie_id")
-      .where({ "movies_theaters.is_showing": true })
+    return knex("movies")
+      .distinct('movies.movie_id')
+      .select("movies.*")
+      .join("movies_theaters", "movies_theaters.movie_id", "movies.movie_id")
+      .where({ "movies_theaters.is_showing": true });
   }
 
-  return query;
+  return knex("movies").select("*");
 }
 
 async function read(movie_id) {
@@ -29,7 +29,7 @@ async function getTheaters(movie_id) {
 async function getReviews(movie_id) {
   return knex("movies")
     .join("reviews", "reviews.movie_id", "movies.movie_id")
-    .where({ "movies.movie_id": movie_id })
+    .where({ "movies.movie_id": movie_id });
 }
 
 async function getCriticInfo(review_id) {
