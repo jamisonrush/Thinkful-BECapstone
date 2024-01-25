@@ -4,6 +4,9 @@ const methodNotAllowed = require("../errors/methodNotAllowed");
 
 const reviewsRouter = require("../reviews/reviews.router");
 const theatersRouter = require("../theaters/theaters.router");
+const cors = require("cors");
+
+router.use(cors())
 
 // TODO: Add your routes here
 router
