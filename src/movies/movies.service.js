@@ -30,7 +30,6 @@ async function getReviews(movie_id) {
   return knex("movies")
     .join("reviews", "reviews.movie_id", "movies.movie_id")
     .where({ "movies.movie_id": movie_id })
-    .groupBy("reviews.review_id");
 }
 
 async function getCriticInfo(review_id) {
